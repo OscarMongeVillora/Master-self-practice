@@ -1,0 +1,124 @@
+#Borramos los datos
+rm(list=ls())
+
+#Lectura de los datos
+#data(package="ISLR")
+carseats<-Carseats
+names(carseats)
+colnames(carseats)
+carseats
+#---- Pregunta 1: Previsualizacion de los datos ------#
+hist(carseats$Sales, prob = T)
+lines(density(carseats$Sales))
+
+#Clase de cada variable 
+sapply(carseats,class)
+plot(carseats)
+qqnorm(carseats$Sales)
+qqline(carseats$Sales)
+
+#---- Pregunta 2: Clssification decision tree ------#
+
+#creamos una variable dicotomica para sales
+High = ifelse(carseats$Sales<=8, "No", "Yes")
+carseats = data.frame(carseats, High)
+
+#creamos un decision tree para todo el dataset menos Sales
+tree.carseats = tree(High~.-Sales, data=carseats)
+
+#vemos los resultados del arbol
+summary(tree.carseats)
+
+#Nuestro modelo tiene un 9% de clasificacion erronea.
+#Con un deviance de .4575:
+#desviacion residual total (SSE) /(n datos-n terminales) (regresion)
+#-2/df*sum (sum (n_ik*log(p_ik))) (https://stats.stackexchange.com/questions/6581/what-is-deviance-specifically-in-cart-rpart)
+
+
+
+#---- Pregunta 3: Analisis grafico ------#
+
+plot(tree.carseats)
+text(tree.carseats, pretty = 4) 
+
+
+tree.carseats
+
+# Vemos que el predictor mas fuerte es la ubicación en el estante.
+# Los asientos con “buenos” estantes tienen una mayor probabilidad de comprarse.
+# El lado del arbol que tiene en cuenta las estanterias medianas / malas es considerablemente mas complejo,
+# y si bien el precio sigue siendo importante, algunas otras variables como la publicidad también tienen poder
+# de prediccion. En general, podríamos hacerlo un poco mejor podando el arbol.
+# Usaremos la validación cruzada para determinar el numero ideal de nodos
+# terminales en función del los errores de clasificación en el conjunto de prueba.
+tree.pred = predict(tree.carseats, carseats, type="class")
+
+#matriz de confusion
+with(carseats, table(tree.pred, High))
+acc = 0.91
+tpr = 0.92
+tnr = 0.90
+#---- Pregunta 4: train vs test ------#
+
+
+set.seed(3) #para que puedan obtener todos el mismo valor
+train=sample(1:nrow(carseats), 250) #tomamos 250 valores de 400
+
+#Creamos el decision tree solo con los indices de train
+tree.carseats = tree(High~.-Sales, carseats, subset=train)
+
+#visualizamos
+plot(tree.carseats)
+text(tree.carseats, pretty=0)
+
+# Se ve un poco distinto debido al conjunto de datos ligeramente diferente.
+tree.pred = predict(tree.carseats, carseats[-train,], type="class")
+
+#matriz de confusion solo para datos de test
+with(carseats[-train,], table(tree.pred, High))
+acc = 0.69
+tpr = 0.689
+tnr = 0.695  #con test -- > nos está indicando que hay mucho overfitting
+
+# con train:
+acc = 0.916
+tpr = 0.915
+tnr = 0.916
+
+
+#---- Pregunta 5: Cost-complexity pruning ------#
+
+
+
+# Vamos a usar la validación cruzada para podar el arbol de manera optima.
+# prune.misclass usa el error de clasificación erronea como base para hacer la poda.
+cv.carseats = cv.tree(tree.carseats, FUN = prune.misclass,K = 10)
+cv.carseats
+prune.misclass(tree.carseats)
+#size: numero de nodos terminales
+#dev: numero de valores mal clasificados (esto es porque 
+#hemos cambiado la funcion de pruning)
+#k: parametro de pruning mas info: en http://mlwiki.org/index.php/Cost-Complexity_Pruning
+
+plot(cv.carseats$size,cv.carseats$dev,type="b")
+
+
+#seleccionamos finalmente el numero de nodos terminales
+prune.carseats = prune.misclass(tree.carseats, best = 8)
+plot(prune.carseats)
+text(prune.carseats, pretty=0)
+
+
+#clasificamos los valores de prediccion
+tree.pred = predict(prune.carseats, carseats[-train,], type="class")
+with(carseats[-train,], table(tree.pred, High))
+(75 + 36) / 150
+
+
+
+
+#---- Pregunta 6: TAREA ------#
+
+
+
+

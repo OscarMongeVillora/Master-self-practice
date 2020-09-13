@@ -1,0 +1,25 @@
+{
+    "collab_server" : "",
+    "contents" : "",
+    "created" : 1581705973804.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "2264260626",
+    "id" : "BA3B78BD",
+    "lastKnownWriteTime" : 1581627198,
+    "last_content_update" : 1581627198,
+    "path" : "C:/Users/PC/Desktop/KSCHOOL_MASTER_DS/Supervised_Learning/Actualizado/Supervised_Learning/Computer_vision_(basic_deep_learning)/object_detection/.Rprofile",
+    "project_path" : ".Rprofile",
+    "properties" : {
+        "cursorPosition" : "26,0",
+        "scrollLine" : "8"
+    },
+    "read_only" : false,
+    "read_only_alternatives" : [
+    ],
+    "relative_order" : 1,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_source"
+}

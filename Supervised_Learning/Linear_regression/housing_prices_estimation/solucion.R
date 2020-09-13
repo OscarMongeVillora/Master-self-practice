@@ -1,0 +1,294 @@
+rm(list=ls())
+
+#load dataset, you can use choose file also
+my_data<-as.data.frame(fread("./data_in/housing_dataset.txt"))
+#my_data<-as.data.frame(fread(choose.files()))
+my_data
+
+#verify type of variable for each column
+sapply(my_data,function(x) class(x))
+
+#Calculo de las correlaciones entre las variables 
+View(cor(my_data))
+
+
+M <- cor(my_data)
+col1 <- colorRampPalette(c("blue", "yellow"))
+
+cex.before <- par("cex")
+par(cex = 0.7)
+corrplot(M, method = "color",
+         col=col1(100), #eliges el color
+         addCoef.col = "black", #color de los coeficientes
+         tl.col="black", #color de las letras de los ejes
+         tl.cex=1, #Tamaño de la letra de los ejes
+         tl.srt=45, #Rotación eje x
+         is.corr=T, #es una correlación? sí
+         cl.offset=1, #Separación de label con el corrplot
+         cl.cex=1/par("cex")
+)
+
+
+
+
+#Definimos las variables
+
+y<-my_data$MEDV     # valor mediano de las casas en miles de dólares
+x1<-my_data$CRIM    # tasa de crimen
+x2<-my_data$ZN     # proporción terreno residencial
+x3<-my_data$INDUS    # proporción de terreno industrial
+x4<-my_data$CHAS      # variable dicotomica (=1 zona con rio; 0 sin rio)
+x5<-my_data$NOX      # concentración de oxido nitroso
+x6<-my_data$RM       # número medio de habitaciones
+x7<-my_data$AGE      # proporción de casa contruidas antes de 1940
+x8<-my_data$DIS      # distancia a oficinas de empleo
+x9<-my_data$RAD      # indice de acceso a carreteras de circunvalación
+x10<-my_data$TAX      # tasa de impuestos sobre el precio de la casa por cada $10,000
+x11<-my_data$PTRATIO  # ratio estudiante/maestro en las escuelas
+x12<-my_data$B        # 1000*(Bk-0.63)^2 donde Bk es la proporción de inmigrantes
+x13<-my_data$LSTAT    # porcentaje de población de clase baja
+
+
+
+# Analisis de la hipotesis de distribucion gaussiana de la variable MEDV
+par( mfcol = c( 1, 2))
+y<-my_data$MEDV
+hist(y,prob=T,main="Histograma de Frecuencias Relativas, variable MEDV",ylab=
+       "Densidad", xlab="MEDV")
+lines(density(y),col="blue")
+qqnorm(y,main="Normal Q-Q Plot, variable MEDV",ylab="Cuantiles de Muestra",
+       xlab="Cuantiles Teóricos")
+qqline(y,col="blue")
+lillie.test(y)
+shapiro.test(y)
+
+# Análisis de normalidad de la variable log(MEDV)
+y<-log(y)
+hist(y,prob=T,main="Histograma de Frecuencias Relativas, variable log(MEDV)",ylab=
+       "Densidad", xlab="MEDV")
+lines(density(y),col="blue")
+qqnorm(y,main="Normal Q-Q Plot, variable log(MEDV)",ylab="Cuantiles de Muestra",
+       xlab="Cuantiles Teóricos")
+qqline(y,col="blue")
+lillie.test(y)
+shapiro.test(y)
+
+
+par(mfcol=c(3,4))
+
+
+plot(x1,y)
+abline(lm(y~x1))
+plot(x2,y)
+abline(lm(y~x2))
+plot(x3,y)
+abline(lm(y~x3))
+plot(x4,y)
+abline(lm(y~x4))
+plot(x5,y)
+abline(lm(y~x5))
+plot(x6,y)
+abline(lm(y~x6))
+plot(x7,y)
+abline(lm(y~x7))
+plot(x9,y)
+abline(lm(y~x9))
+plot(x10,y)
+abline(lm(y~x10))
+plot(x11,y)
+abline(lm(y~x11))
+plot(x12,y)
+abline(lm(y~x12))
+plot(x13,y)
+abline(lm(y~x13))
+
+# Notese que, para la variable x8 hemos tenido una mejora considerable, por lo que la
+# transformacion es correcta. 
+par(mfcol=c(1,2))
+plot(x8,y)
+abline(lm(y~x8))
+plot(log(x8),y)
+abline(lm(y~log(x8)))
+cor(y, x8)
+cor(y, log(x8))
+# Por otra parte, la correlacion entre dichas variables aumenta de
+# 0.3503 a 0.4156 lo cual confirma que nuestra transformacion ha sido acertada.
+
+
+
+
+########Analisis de los modelos simples con la variable log(MEDV)##############
+
+par( mfcol = c( 2, 2 ))
+
+summary(lm(y~x1))
+plot(lm(y~x1))
+
+summary(lm(y~x2))
+plot(lm(y~x2))
+
+summary(lm(y~x3))
+plot(lm(y~x3))
+
+summary(lm(y~x4))
+plot(lm(y~x4))
+
+summary(lm(y~x5))
+plot(lm(y~x5))
+
+summary(lm(y~x6))
+plot(lm(y~log(x6)))
+
+summary(lm(y~x7))
+plot(lm(y~x7))
+
+summary(lm(y~x8))
+plot(lm(y~x8))
+
+summary(lm(y~log(x8)))
+plot(lm(y~log(x8)))
+
+summary(lm(y~x9))
+plot(lm(y~x9))
+
+summary(lm(y~x10))
+plot(lm(y~x10))
+
+summary(lm(y~x11))
+plot(lm(y~x11))
+
+summary(lm(y~x12))
+plot(lm(y~x12))
+
+summary(lm(y~x13))
+plot(lm(y~x13))
+
+x8<-log(x8)
+
+##############Modelo con todas las variables########################
+
+#Un buen modelo de regresion lineal deberia cumplir las siguientes caracteristicas:
+# -R-squared alto (>0.70).
+# -Adj R-squared alto.
+# -F statistic mientras mas alto mejor (no se tiene una medida de cual es alto).
+# -t-statistic deberia ser mayor a 1.96 para p-valores<0.05.
+# -AIC y BIC pequenos.
+
+
+model<-lm(y~x1+x2+x3+x4+x5+x6+x7+x8+x9+x10+x11+x12+x13)
+summary(model)
+vif(model)
+
+# Un valor t mayor indica que es menos probable que el coeficiente no
+#sea igual a cero simplemente por casualidad. Por lo tanto, cuanto
+# mayor sea el valor t, mejor.
+# t=\frac{\beta-coefficient}{Std. Error}
+
+# las variables CRIME, ZONE, INDUS, y AGE, son poco significativas, lo
+# cual nos indica que probablemente seran eliminadas del modelo. Para confirmar nuestras
+# sospechas, empleamos el Criterio de Informacion de Akaike (AIC por sus siglas en ingles).
+
+
+
+# El criterio de información de Akaike - AIC (Akaike, 1974) y el
+# criterio de información bayesiano - BIC (Schwarz, 1978) son
+# medidas de la bondad de ajuste de un modelo estadístico estimado
+# y también se pueden usar para la selección de modelos. 
+
+
+
+
+###################Akaike Information Criteria###########################
+step(model,trace=F)$anova
+
+# En efecto nos indica que las variables antes mencionadas no son significativas en
+# el modelo. Finalmente, retomamos nuestra matriz de correlaciones ya calculada y podemos
+# apreciar que las variables en cuestion estan bastante correlacionadas con muchas de las demas
+# variables, por lo cual las eliminamos del modelo para evitar el problema de multicolinealidad.
+
+
+
+##Eliminamos                                                                                                                 las veriables CRIM(x1), ZN(x2), INDUS(x3), AGE(x7)###########
+
+model<-lm(y~x4+x5+x6+x8+x9+x10+x11+x12+x13)
+summary(model)
+
+# Este modelo, segun los resultados que nos proporciona el software R, no presenta variables
+# que sean poco significativas, por otra parte el R2 - Ajustado aumenta muy poco, es decir el
+# modelo con todas las variables explica un 76.29% de la variabilidad de log(MEDV), mientras
+# que el nuevo modelo explica 76.35% de la variabilidad de log(MEDV), lo cual confirma que
+# el haber eliminado las variables antes mencionadas redujo en una proporcion considerable el
+# problema de multicolinealidad.
+
+
+###Factor de Inflación de la Varianza (VIF)######
+vif(model)
+
+######Modelo eliminando la variable TAX(x10)###########
+model<-lm(y~x4+x5+x6+x8+x9+x11+x12+x13)
+summary(model)
+
+######Aplicamos nuevamente AIC#########
+step(model,trace=F)$anova
+
+#########Eliminamos la variable RAD(x9)##################
+model<-lm(y~x4+x5+x6+x8+x11+x12+x13)
+summary(model)
+
+#############Calculamos nuevamente el VIF##################
+vif(model)
+
+
+
+##############Creacion del modelo final###################
+
+
+y<-log(my_data$MEDV)     #logaritmo del valor mediano de las casas en miles de dólares
+x4<-my_data$CHAS      # variable dicotomica (=1 zona con rio; 0 sin rio)
+x5<-my_data$NOX      # concentración de oxido nitroso
+x6<-my_data$RM       # número medio de habitaciones
+x8<-log(my_data$DIS) # logaritmo de distancia a oficinas de empleo
+x11<-my_data$PTRATIO  # ratio estudiante/maestro en las escuelas
+x12<-my_data$B        # 1000*(Bk-0.63)^2 donde Bk es la proporción de inmigrantes
+x13<-my_data$LSTAT    # porcentaje de población de clase baja
+
+
+model<-lm(y~x4+x5+x6+x8+x11+x12+x13)
+summary(model)
+par(mfcol=c(2,2))
+plot(model)
+
+####Hacemos AIC y VIF para confirmar que no haya multicolinealidad#####
+
+vif(model)
+step(model,trace=F)$anova
+
+
+
+
+
+
+#####Prediccion de los datos#####
+
+
+# Para esta interrogante, hicimos un analisis muy simple,
+# utilizamos los datos de la prediccion anterior considerando que
+# la vivienda tenga un rio cerca y vemos el porcentaje de aumento o
+# disminucion. 
+
+data_0<-data.frame(x4=0,x5=0.508,x6=5.575,x8=4.19,
+                  x11=16.3, x12=321.9, x13=2.98)
+pred_0<-exp(predict.lm(model,data_0,interval="confidence"))
+
+data_1<-data.frame(x4=1,x5=0.508,x6=5.575,x8=4.19,
+                  x11=16.3, x12=321.9, x13=2.98)
+pred_1<-exp(predict.lm(model,data_1,interval="confidence"))
+
+pred_1/pred_0
+
+# tomando RIV=1 el valor de la vivienda
+# aumentaria entre un 11% y un 16%.
+
+
+
+

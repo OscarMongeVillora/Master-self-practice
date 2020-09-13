@@ -1,0 +1,26 @@
+{
+    "collab_server" : "",
+    "contents" : "",
+    "created" : 1582014505187.000,
+    "dirty" : true,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "0",
+    "id" : "728018B7",
+    "lastKnownWriteTime" : 1582019294,
+    "last_content_update" : 1582027298235,
+    "path" : "C:/Users/PC/Desktop/KSCHOOL_MASTER_DS/R/REPASO11R.R",
+    "project_path" : null,
+    "properties" : {
+        "cursorPosition" : "116,0",
+        "scrollLine" : "94",
+        "tempName" : "Untitled1"
+    },
+    "read_only" : false,
+    "read_only_alternatives" : [
+    ],
+    "relative_order" : 1,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_source"
+}

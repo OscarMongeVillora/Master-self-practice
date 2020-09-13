@@ -1,0 +1,25 @@
+{
+    "collab_server" : "",
+    "contents" : "",
+    "created" : 1583849358607.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "0",
+    "id" : "303455B1",
+    "lastKnownWriteTime" : 1583852990,
+    "last_content_update" : 1583852990228,
+    "path" : "C:/Users/PC/Desktop/KSCHOOL_MASTER_DS/Supervised_Learning/Actualizado/Supervised_Learning/Logistic_regression/credit_score/ejOscar.R",
+    "project_path" : null,
+    "properties" : {
+        "cursorPosition" : "55,0",
+        "scrollLine" : "32"
+    },
+    "read_only" : false,
+    "read_only_alternatives" : [
+    ],
+    "relative_order" : 2,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_source"
+}

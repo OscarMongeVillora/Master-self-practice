@@ -1,0 +1,25 @@
+{
+    "collab_server" : "",
+    "contents" : "",
+    "created" : 1584651960113.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "1446725831",
+    "id" : "6954DFC3",
+    "lastKnownWriteTime" : 1570492296,
+    "last_content_update" : 1570492296,
+    "path" : "C:/Users/PC/Desktop/KSCHOOL_MASTER_DS/Supervised_Learning/Actualizado/Supervised_Learning/Decision_tree/.Rprofile",
+    "project_path" : ".Rprofile",
+    "properties" : {
+        "cursorPosition" : "16,0",
+        "scrollLine" : "0"
+    },
+    "read_only" : false,
+    "read_only_alternatives" : [
+    ],
+    "relative_order" : 2,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_source"
+}

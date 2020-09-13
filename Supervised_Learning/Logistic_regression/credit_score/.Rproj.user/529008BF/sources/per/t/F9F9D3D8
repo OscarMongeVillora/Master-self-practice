@@ -1,0 +1,25 @@
+{
+    "collab_server" : "",
+    "contents" : "",
+    "created" : 1583492152159.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "1816816756",
+    "id" : "F9F9D3D8",
+    "lastKnownWriteTime" : 1581019732,
+    "last_content_update" : 1581019732,
+    "path" : "C:/Users/PC/Desktop/KSCHOOL_MASTER_DS/Supervised_Learning/Actualizado/Supervised_Learning/Logistic_regression/credit_score/.Rprofile",
+    "project_path" : ".Rprofile",
+    "properties" : {
+        "cursorPosition" : "20,0",
+        "scrollLine" : "0"
+    },
+    "read_only" : false,
+    "read_only_alternatives" : [
+    ],
+    "relative_order" : 2,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_source"
+}

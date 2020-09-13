@@ -1,0 +1,29 @@
+{
+    "collab_server" : "",
+    "contents" : "",
+    "created" : 1581161031929.000,
+    "dirty" : false,
+    "encoding" : "",
+    "folds" : "",
+    "hash" : "0",
+    "id" : "BF187036",
+    "lastKnownWriteTime" : 7868742328887309409,
+    "last_content_update" : 1581161031929,
+    "path" : null,
+    "project_path" : null,
+    "properties" : {
+        "cacheKey" : "C0345D23",
+        "caption" : "carseats",
+        "contentUrl" : "grid_resource/gridviewer.html?env=&obj=carseats&cache_key=C0345D23",
+        "displayedObservations" : 400,
+        "environment" : "",
+        "object" : "carseats",
+        "preview" : 0,
+        "totalObservations" : 400,
+        "variables" : 12
+    },
+    "relative_order" : 5,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_dataframe"
+}

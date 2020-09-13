@@ -1,0 +1,26 @@
+{
+    "collab_server" : "",
+    "contents" : "",
+    "created" : 1585675324015.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "0",
+    "id" : "B5CC6260",
+    "lastKnownWriteTime" : 1585756148,
+    "last_content_update" : 1585756149930,
+    "path" : "C:/Users/PC/Desktop/KSCHOOL_MASTER_DS/Supervised_Learning/Actualizado/Supervised_Learning/Support_vector_machine/svm_multiclase_tumores.R",
+    "project_path" : null,
+    "properties" : {
+        "cursorPosition" : "44,0",
+        "scrollLine" : "0",
+        "tempName" : "Untitled1"
+    },
+    "read_only" : false,
+    "read_only_alternatives" : [
+    ],
+    "relative_order" : 3,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_source"
+}

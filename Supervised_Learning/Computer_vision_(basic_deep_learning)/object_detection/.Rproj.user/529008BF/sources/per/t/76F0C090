@@ -1,0 +1,25 @@
+{
+    "collab_server" : "",
+    "contents" : "",
+    "created" : 1581706003516.000,
+    "dirty" : true,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "3653074794",
+    "id" : "76F0C090",
+    "lastKnownWriteTime" : 1581627088,
+    "last_content_update" : 1581707031875,
+    "path" : "C:/Users/PC/Desktop/KSCHOOL_MASTER_DS/Supervised_Learning/Actualizado/Supervised_Learning/Computer_vision_(basic_deep_learning)/object_detection/Solucion.R",
+    "project_path" : "Solucion.R",
+    "properties" : {
+        "cursorPosition" : "114,0",
+        "scrollLine" : "104"
+    },
+    "read_only" : false,
+    "read_only_alternatives" : [
+    ],
+    "relative_order" : 2,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_source"
+}

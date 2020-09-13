@@ -1,0 +1,118 @@
+mtcars
+reg <-lm(mpg ~hp, mtcars)
+a <- c(0:10)*coefficients(reg)[2] + coefficients(reg)[1]
+plot(c(0:10), a)
+
+plot(mtcars$hp, fitted(reg))
+plot(mtcars$hp, residuals(reg))
+
+
+library(ggplot2)
+
+ggplot(mtcars,
+       aes(x = hp,
+           y = mpg)) +
+  geom_point()+
+  geom_smooth(method = "lm")
+
+
+# EJERCICIO
+
+summary(anscombe)
+anscombe
+
+means_x = c(mean(anscombe$x1), mean(anscombe$x2),
+            mean(anscombe$x3), mean(anscombe$x4))
+means_y = c(mean(anscombe$y1), mean(anscombe$y2),
+            mean(anscombe$y3), mean(anscombe$y4))
+var_x = c(var(anscombe$x1), var(anscombe$x2),
+          var(anscombe$x3), var(anscombe$x4))
+var_y = c(var(anscombe$y1), var(anscombe$y2),
+          var(anscombe$y3), var(anscombe$y4))
+
+cors = c(cor(anscombe$x1, anscombe$y1),cor(anscombe$x2, anscombe$y2),
+         cor(anscombe$x3, anscombe$y3), cor(anscombe$x4, anscombe$y4))
+
+ggplot(anscombe,
+       aes(x1, y1))+
+  geom_point()+
+  geom_smooth(method = "lm")
+
+ggplot(anscombe,
+       aes(x2, y2))+
+  geom_point()+
+  geom_smooth(method = "lm")
+
+ggplot(anscombe,
+       aes(x3, y3))+
+  geom_point()+
+  geom_smooth(method = "lm")
+
+ggplot(anscombe,
+       aes(x4, y4))+
+  geom_point()+
+  geom_smooth(method = "lm")
+
+#Solucion
+apply(anscombe, 2, mean)
+apply(anscombe, 2, sd)
+
+library(data.table)
+tabl <- data.table(anscombe)
+tabl <- cbind(tabl, c(1:length(anscombe$x1)))
+tabl
+tabl2 <- melt(tabl,id.vars = "V2", 
+              measure.vars = c("x1", "x2", "x3", "x4",
+                            "y1", "y2", "y3", "y4"))
+
+
+anscombe.long <- rbind(data.frame(set = "s1", 
+                                         x = anscombe$x1, 
+                                         y = anscombe$y1),
+                       data.frame(set = "s2", 
+                                         x = anscombe$x2, 
+                                         y = anscombe$y2),
+                       data.frame(set = "s3", 
+                                         x = anscombe$x3, 
+                                         y = anscombe$y3),
+                       data.frame(set = "s4", 
+                                         x = anscombe$x4, 
+                                         y = anscombe$y4))
+anscombe.long
+
+ggplot(anscombe.long,
+       aes(x, y, color = set))+
+  geom_point()+
+  geom_smooth(method = "lm")+
+  facet_wrap(~set)
+
+mtcars
+
+plot(mtcars[,1:5])
+
+library(GGally)
+ggpairs(mtcars,
+        columns = 1:5,
+        progress = FALSE)
+mtcars
+
+# Exercise
+library(data.table)
+library(ggplot2)
+#Mi metodo
+wine1 <- fread("winequality-red.csv")
+wine <- cbind(wine1, c(1:length(wine$sulphates)))
+wine <- melt(wine,
+             id.vars = "V2",
+             measure.vars = names(wine))
+wine <- wine[variable != "V2"]
+
+ggplot(wine,
+       aes(x = value)) +
+  geom_histogram(aes(fill = variable), 
+                 breaks = c(0:20) ) +
+  facet_wrap(~variable)
+
+install.packages("ggpubr")
+library(ggpubr)
+pairs(wine1[, 2:12])
